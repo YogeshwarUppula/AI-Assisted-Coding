@@ -1,0 +1,125 @@
+<!--
+Crop Yield Prediction Web Application
+Frontend: HTML + Jinja2 template for Flask
+
+This page collects soil and climate data from user
+and displays prediction + recent history.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags for screen size & UTF support -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Crop Yield Prediction</title>
+
+    <!-- Linking external CSS file -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- Top Banner / Header -->
+<header class="hero">
+    <div class="hero-overlay">
+        <h1 class="main-title">🌱 Crop Yield Prediction</h1>
+    </div>
+</header>
+
+
+<!-- Main Layout: Form + Result -->
+<div class="page-layout">
+
+    <!-- =============================== -->
+    <!-- INPUT FORM SECTION (LEFT SIDE) -->
+    <!-- =============================== -->
+    <div class="form-box">
+
+        <!-- Form sends data to /predict with POST method -->
+        <form action="/predict" method="post">
+
+            <!-- Dropdown populated dynamically using Flask/Jinja -->
+            <label>Soil Type</label>
+            <select name="soil_type" required>
+                {% for soil in soil_options %}
+                <option value="{{ soil }}">{{ soil }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Input for pH value (decimal allowed) -->
+            <label>Soil pH</label>
+            <input type="number" name="ph" step="0.01" required>
+
+            <!-- Soil Moisture percentage -->
+            <label>Soil Moisture (%)</label>
+            <input type="number" name="moisture" step="0.01" required>
+
+            <!-- Temperature input -->
+            <label>Temperature (°C)</label>
+            <input type="number" name="temperature" step="0.01" required>
+
+            <!-- Humidity input -->
+            <label>Humidity (%)</label>
+            <input type="number" name="humidity" step="0.01" required>
+
+            <!-- Rainfall input -->
+            <label>Rainfall (mm)</label>
+            <input type="number" name="rainfall" step="0.01" required>
+
+            <!-- Button to submit form -->
+            <button type="submit">Predict Yield 🌾</button>
+
+        </form>
+    </div>
+
+
+    <!-- ============================== -->
+    <!-- OUTPUT RESULT SECTION (RIGHT) -->
+    <!-- ============================== -->
+    <div class="result-box">
+        
+        <!-- If prediction exists: show result -->
+        {% if prediction_value %}
+        <div class="result">{{ prediction_value | safe }}</div>
+
+        <!-- Otherwise show placeholder message -->
+        {% else %}
+        <div class="placeholder">📊 Prediction result will appear here!</div>
+        {% endif %}
+
+        <!-- Show prediction history (if available) -->
+        {% if history %}
+        <br><br>
+        <h3>Recent Predictions</h3>
+
+        <!-- Display last 5 predictions in table format -->
+        <table class="history-table" border="1">
+            <tr>
+                <th>Soil</th><th>pH</th>
+                <th>Moisture</th><th>Temp</th>
+                <th>Humidity</th><th>Rainfall</th>
+                <th>Yield</th>
+            </tr>
+
+            <!-- Loop to show rows from CSV history -->
+            {% for row in history %}
+            <tr>
+                <td>{{ row.Soil }}</td>
+                <td>{{ row.pH }}</td>
+                <td>{{ row.Moisture }}</td>
+                <td>{{ row.Temp }}</td>
+                <td>{{ row.Humidity }}</td>
+                <td>{{ row.Rainfall }}</td>
+                <td>{{ row.Yield }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

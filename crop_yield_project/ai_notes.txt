@@ -1,0 +1,45 @@
+
+
+Project Title:
+Crop Yield Prediction Web Application
+
+Purpose of this File:
+To document where and how AI assisted in the development process of this project.
+
+-----------------------------------------------------
+1) AI Tools Used
+-----------------------------------------------------
+• ChatGPT (as a code assistant)
+• VS Code (for writing and editing code)
+• Web browser for searching references
+• Python libraries: Flask, pandas
+
+-----------------------------------------------------
+2) How AI Helped in Development
+-----------------------------------------------------
+• Guidance on how to structure Flask project files
+• Help in writing HTML and CSS layout
+• Debugging errors in Flask code
+• Suggestions on improving UI design
+• Helped in writing comments and documentation
+• Provided tips for running project using terminal
+
+-----------------------------------------------------
+3) Example Prompts Given to AI
+-----------------------------------------------------
+• "Give me a simple crop yield prediction project"
+• "Add spacing between form input boxes"
+• "Show recent predictions in a table"
+• "Add comments and docstrings to my code"
+• "Make web page attractive with CSS"
+
+-----------------------------------------------------
+4) Manual Work Done by Me
+-----------------------------------------------------
+• Collected and prepared sample dataset for crop yield
+• Renamed CSV and placed in correct folder
+• Adjusted alignment of webpage elements
+• Replaced background images and tried different colors
+• Tested different input values in the webpage
+• Created folders like /templates, /static, /data manually
+
